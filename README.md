@@ -2,6 +2,10 @@
 
 This repo serves as an example for the Python and Golang containers that Mythic supports.
 
+## crypto_provider
+
+[`Payload_Type/crypto_provider`](Payload_Type/crypto_provider) is a standalone Go skeleton for Mythic's crypto-provider API v1. It demonstrates registration, authenticated RPC, the optional opaque state store and the boundary between shared service plumbing and replaceable cryptographic code. Its protocol methods are explicit stubs; see its README to copy only this example into a service repository.
+
 ## go_services
 
 `go_services` is an example container that supports:

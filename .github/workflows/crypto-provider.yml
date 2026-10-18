@@ -1,0 +1,32 @@
+name: Crypto provider example
+
+on:
+  push:
+    paths:
+      - 'Payload_Type/crypto_provider/**'
+      - '.github/workflows/crypto-provider.yml'
+  pull_request:
+    paths:
+      - 'Payload_Type/crypto_provider/**'
+      - '.github/workflows/crypto-provider.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Payload_Type/crypto_provider
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.27.2'
+          cache-dependency-path: Payload_Type/crypto_provider/go.sum
+      - name: Build without native crypto dependencies
+        run: make build
+      - name: Check protocol stubs and request authorization
+        run: go test -race -count=1 ./...
